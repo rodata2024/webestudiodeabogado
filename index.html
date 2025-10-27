@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Del Rio Abogados 2 – Asesoría Legal Estratégica</title>
+  <title>Del Rio Abogados – Asesoría Legal Estratégica</title>
   <meta name="description" content="Estudio jurídico Del Rio Abogados. Litigios y arbitraje, corporativo y laboral. Atención en todo el Perú." />
 
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
@@ -55,13 +55,10 @@
     .brand-wrap{display:flex;align-items:center;gap:.7rem}
     .brand{font-weight:800;color:var(--gris-700);line-height:1}
     .brand span{display:block;color:var(--rojo);line-height:1;margin-top:-2px}
-    /* Logo mini SVG con D+R triangular */
     .logo svg{display:block}
-    /* Links */
     .nav-links{display:flex;align-items:center;gap:clamp(14px,2.6vw,28px)}
     .nav-links a{color:var(--gris-700);font-weight:600;padding:.6rem .2rem;border-radius:10px}
     .nav-links a:hover{color:var(--rojo)}
-    /* Burger */
     .burger{display:none;border:0;background:transparent;width:44px;height:44px;padding:0}
     .burger span{display:block;height:3px;background:var(--gris-700);margin:6px 5px;border-radius:2px}
 
@@ -76,7 +73,6 @@
     .grid-areas{display:grid;gap:var(--gap-2);grid-template-columns:1fr}
     @media (min-width:720px){.grid-areas{grid-template-columns:repeat(2,1fr)}}
     @media (min-width:1024px){.grid-areas{grid-template-columns:repeat(3,1fr)}}
-
     .card{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:var(--gap-2)}
     .card h3{color:var(--rojo);margin-bottom:.35rem}
     .icon{width:50px;height:50px;border-radius:12px;display:grid;place-items:center;margin-bottom:.6rem;background:color-mix(in srgb, var(--rojo) 14%, white)}
@@ -222,7 +218,8 @@
     <div class="container">
       <h2>Contáctanos</h2>
       <div class="contact" style="margin-top:var(--gap-2)">
-        <form class="card" onsubmit="event.preventDefault(); alert('¡Gracias! Responderemos pronto.');" aria-label="Formulario de contacto">
+        <!-- FORM: ahora con id y botón "Enviar por Gmail" -->
+        <form id="contactForm" class="card" aria-label="Formulario de contacto">
           <div class="row">
             <div>
               <label for="nombre">Nombre</label>
@@ -248,7 +245,8 @@
             <textarea id="mensaje" name="mensaje" required></textarea>
           </div>
           <div style="margin-top:var(--gap-1)">
-            <button class="btn" type="submit">Enviar consulta</button>
+            <button class="btn" type="button" id="enviarGmail">Enviar por Gmail</button>
+            <p id="formMsg" class="muted" style="margin-top:.6rem"></p>
           </div>
         </form>
 
@@ -256,7 +254,14 @@
           <h3>Información</h3>
           <p><strong>Dirección:</strong> Av. Principal 123, Piso 10 – San Isidro, Lima</p>
           <p><strong>Tel:</strong> +51 000 000 000</p>
-          <p><strong>Correo:</strong> contacto@delrioabogados.pe</p>
+          <p><strong>Correo:</strong>
+            <a target="_blank" rel="noopener"
+               href="https://mail.google.com/mail/?view=cm&fs=1&to=rmesahuancah@unmsm.edu.pe">
+               rmesahuancah@unmsm.edu.pe
+            </a>
+            &nbsp;·&nbsp;
+            <a href="mailto:rmesahuancah@unmsm.edu.pe" class="muted">usar app de correo</a>
+          </p>
           <p class="muted">Horario: Lun–Vie 9:00–18:00</p>
         </aside>
       </div>
@@ -308,6 +313,48 @@
       burger.setAttribute('aria-expanded', open);
     });
     menu.querySelectorAll('a').forEach(a => a.addEventListener('click', ()=>menu.classList.remove('open')));
+
+    // Botón: abrir Gmail con datos del formulario
+    const btnGmail = document.getElementById('enviarGmail');
+    const msgEl = document.getElementById('formMsg');
+
+    function val(id){ return (document.getElementById(id)?.value || '').trim(); }
+
+    btnGmail?.addEventListener('click', () => {
+      const nombre  = val('nombre');
+      const correo  = val('correo');
+      const tel     = val('telefono');
+      const asunto  = val('asunto');
+      const mensaje = val('mensaje');
+
+      if(!nombre || !correo || !asunto || !mensaje){
+        msgEl.textContent = 'Completa nombre, correo, asunto y mensaje.';
+        msgEl.style.color = '#b91c1c';
+        return;
+      }
+
+      const to   = 'rmesahuancah@unmsm.edu.pe';
+      const su   = encodeURIComponent(`[Web] ${asunto} – ${nombre}`);
+      const body = encodeURIComponent(
+`Hola Del Rio Abogados,
+
+Mi nombre: ${nombre}
+Correo: ${correo}
+Teléfono: ${tel || '—'}
+
+Mensaje:
+${mensaje}
+
+— Enviado desde delrioabogados.pe`
+      );
+
+      // Abrir Gmail en nueva pestaña
+      const gmailURL = `https://mail.google.com/mail/?view=cm&fs=1&to=${to}&su=${su}&body=${body}`;
+      window.open(gmailURL, '_blank', 'noopener');
+
+      // (Opcional) Fallback a mailto si no usa Gmail:
+      // setTimeout(()=>{ window.location.href = `mailto:${to}?subject=${su}&body=${body}`; }, 500);
+    });
   </script>
 </body>
 </html>
