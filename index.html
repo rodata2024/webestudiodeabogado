@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Del Rio Abogados – Asesoría Legal Estratégica</title>
+  <meta name="description" content="Estudio jurídico Del Rio Abogados. Litigios y arbitraje, corporativo y laboral. Atención en todo el Perú." />
+
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==================== Marca / tokens ==================== */
+    :root{
+      --rojo:#B73239;
+      --rojo-osc:#A22D33;
+      --gris-900:#1f2937;
+      --gris-700:#4b5563;
+      --gris-400:#9ca3af;
+      --gris-200:#f3f4f6;
+      --blanco:#fff;
+      --max:1200px;
+
+      /* Tipos y espacios fluidos */
+      --fz-h1:clamp(1.9rem, 3.8vw, 3.2rem);
+      --fz-h2:clamp(1.4rem, 2.6vw, 2.2rem);
+      --fz-h3:clamp(1.05rem, 1.8vw, 1.35rem);
+      --fz-body:clamp(.98rem, 1.2vw, 1.06rem);
+      --gap-1:clamp(12px, 2.2vw, 18px);
+      --gap-2:clamp(18px, 3.0vw, 26px);
+      --gap-3:clamp(26px, 4.5vw, 44px);
+      --radius:14px;
+      --shadow:0 10px 30px rgba(16,24,40,.08);
+    }
+    /* ==================== Reset ==================== */
+    *,*::before,*::after{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+    body{margin:0;font-family:Montserrat,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--gris-900);line-height:1.6;font-size:var(--fz-body);background:var(--blanco)}
+    img{max-width:100%;display:block}
+    a{text-decoration:none;color:var(--rojo)}
+    .container{max-width:var(--max);margin-inline:auto;padding-inline:clamp(16px, 3.2vw, 28px)}
+    h1,h2,h3{line-height:1.2;margin:0 0 .6rem}
+    h1{font-size:var(--fz-h1)}
+    h2{font-size:var(--fz-h2)}
+    h3{font-size:var(--fz-h3)}
+    p{margin:0 0 1rem}
+    .section{padding-block:var(--gap-3)}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;background:var(--rojo);color:#fff;border:0;border-radius:12px;padding:.9rem 1.2rem;font-weight:700;box-shadow:var(--shadow);transition:.2s ease;min-width:44px;min-height:44px}
+    .btn:hover{background:var(--rojo-osc);transform:translateY(-1px)}
+    .muted{color:var(--gris-700)}
+
+    /* ==================== Header / nav ==================== */
+    .navbar{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid #eee}
+    .nav-inner{display:flex;align-items:center;justify-content:space-between;padding-block:.6rem}
+    .brand-wrap{display:flex;align-items:center;gap:.7rem}
+    .brand{font-weight:800;color:var(--gris-700);line-height:1}
+    .brand span{display:block;color:var(--rojo);line-height:1;margin-top:-2px}
+    /* Logo mini SVG con D+R triangular */
+    .logo svg{display:block}
+    /* Links */
+    .nav-links{display:flex;align-items:center;gap:clamp(14px,2.6vw,28px)}
+    .nav-links a{color:var(--gris-700);font-weight:600;padding:.6rem .2rem;border-radius:10px}
+    .nav-links a:hover{color:var(--rojo)}
+    /* Burger */
+    .burger{display:none;border:0;background:transparent;width:44px;height:44px;padding:0}
+    .burger span{display:block;height:3px;background:var(--gris-700);margin:6px 5px;border-radius:2px}
+
+    /* ==================== Hero ==================== */
+    .hero{isolation:isolate;min-height:72vh;display:grid;place-items:center;text-align:center;color:#fff;background:
+      linear-gradient(rgba(0,0,0,.55), rgba(0,0,0,.55)),
+      url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2000&auto=format&fit=crop') center/cover no-repeat}
+    .hero .container{padding-block:var(--gap-3)}
+    .kicker{display:inline-block;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.25);backdrop-filter:saturate(120%) blur(2px);padding:.35rem .65rem;border-radius:999px;margin-bottom:var(--gap-1);font-weight:700}
+
+    /* ==================== Grillas ==================== */
+    .grid-areas{display:grid;gap:var(--gap-2);grid-template-columns:1fr}
+    @media (min-width:720px){.grid-areas{grid-template-columns:repeat(2,1fr)}}
+    @media (min-width:1024px){.grid-areas{grid-template-columns:repeat(3,1fr)}}
+
+    .card{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:var(--gap-2)}
+    .card h3{color:var(--rojo);margin-bottom:.35rem}
+    .icon{width:50px;height:50px;border-radius:12px;display:grid;place-items:center;margin-bottom:.6rem;background:color-mix(in srgb, var(--rojo) 14%, white)}
+
+    /* ==================== Bloques ==================== */
+    .practice{background:var(--gris-200)}
+    .about p{max-width:70ch}
+    .testi{text-align:center}
+    .quote{font-style:italic;color:var(--gris-700);max-width:75ch;margin-inline:auto}
+    .author{font-weight:700;margin-top:.5rem}
+
+    /* ==================== Contacto ==================== */
+    .contact{display:grid;gap:var(--gap-2);grid-template-columns:1fr}
+    @media (min-width:920px){.contact{grid-template-columns:1.2fr .8fr}}
+    form .row{display:grid;gap:var(--gap-1);grid-template-columns:1fr}
+    @media (min-width:560px){form .row{grid-template-columns:1fr 1fr}}
+    label{font-weight:700;font-size:.95rem}
+    input,textarea{width:100%;margin-top:.4rem;padding:12px 14px;border:1px solid #e5e7eb;border-radius:12px;font:inherit}
+    textarea{min-height:130px;resize:vertical}
+
+    /* ==================== Footer ==================== */
+    .footer{background:#111;color:#e8e8e8}
+    .foot-grid{display:grid;gap:var(--gap-2);grid-template-columns:1fr}
+    @media (min-width:900px){.foot-grid{grid-template-columns:2fr 1fr 1fr 1fr}}
+    .foot-bottom{text-align:center;margin-top:var(--gap-2);padding-top:var(--gap-1);border-top:1px solid #333;color:#cfcfcf;font-size:.95rem}
+    .foot-brand{font-weight:900}
+    .foot-brand span{color:var(--rojo)}
+
+    /* ==================== Helpers ==================== */
+    .sticky-cta{position:fixed;inset:auto 16px 16px 16px;z-index:60}
+    .sticky-cta .btn{width:100%}
+    @media (min-width:760px){.sticky-cta{display:none}}
+  </style>
+</head>
+<body>
+
+  <!-- ============= NAVBAR ============= -->
+  <header class="navbar" aria-label="Barra de navegación">
+    <div class="container nav-inner">
+      <div class="brand-wrap">
+        <a class="logo" href="#inicio" aria-label="Del Rio Abogados">
+          <!-- Mini logo D (gris) + R triangular (rojo) -->
+          <svg width="40" height="40" viewBox="0 0 100 100" aria-hidden="true">
+            <path d="M18 15v70h22q20 0 32-10.5T84 50q0-18-12-26.5T45 15H18Z" fill="#4b5563"/>
+            <path d="M18 52v33h12V64l28 21h16L40 52Z" fill="#B73239"/>
+          </svg>
+        </a>
+        <div class="brand">Del<span>Rio</span></div>
+      </div>
+
+      <button class="burger" id="burger" aria-label="Abrir menú" aria-controls="menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav>
+        <ul id="menu" class="nav-links" role="list">
+          <li><a href="#inicio">Inicio</a></li>
+          <li><a href="#servicios">Áreas</a></li>
+          <li><a href="#nosotros">Nosotros</a></li>
+          <li><a href="#equipo">Equipo</a></li>
+          <li><a class="btn" href="#contacto">Agendar consulta</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ============= HERO ============= -->
+  <section id="inicio" class="hero" role="region" aria-label="Portada">
+    <div class="container">
+      <div class="kicker">Excelencia jurídica · Respuesta estratégica</div>
+      <h1>Asesoría Legal Estratégica</h1>
+      <p class="muted">Litigios y arbitraje, corporativo y laboral. Atención a empresas y personas en todo el Perú.</p>
+      <p style="margin-top:var(--gap-1)"><a class="btn" href="#contacto">Solicitar evaluación</a></p>
+    </div>
+  </section>
+
+  <!-- ============= ÁREAS ============= -->
+  <section id="servicios" class="section practice">
+    <div class="container">
+      <h2>Nuestras áreas de práctica</h2>
+      <p class="muted">Trabajo riguroso, comunicación clara y estrategia orientada a resultados.</p>
+
+      <div class="grid-areas" style="margin-top:var(--gap-2)">
+        <article class="card">
+          <div class="icon">⚖️</div>
+          <h3>Litigios y Arbitraje</h3>
+          <p>Patrocinio en controversias complejas ante Poder Judicial y tribunales arbitrales. Gestión probatoria y estrategia procesal.</p>
+        </article>
+        <article class="card">
+          <div class="icon">💼</div>
+          <h3>Derecho Corporativo</h3>
+          <p>Constitución, reorganización, gobierno corporativo, contratos y compliance para negocios en crecimiento.</p>
+        </article>
+        <article class="card">
+          <div class="icon">👥</div>
+          <h3>Derecho Laboral</h3>
+          <p>Prevención, auditorías y patrocinio. Diseño de políticas laborales y negociaciones colectivas.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= NOSOTROS ============= -->
+  <section id="nosotros" class="section about">
+    <div class="container">
+      <h2>Sobre Del Rio Abogados</h2>
+      <p>Somos un estudio orientado a soluciones. Integramos experiencia litigiosa con visión de negocio para acompañar decisiones críticas de nuestros clientes.</p>
+    </div>
+  </section>
+
+  <!-- ============= EQUIPO ============= -->
+  <section id="equipo" class="section">
+    <div class="container">
+      <h2>Nuestro equipo</h2>
+      <div class="grid-areas" style="margin-top:var(--gap-2)">
+        <div class="card">
+          <h3>Socia Directora</h3>
+          <p>Especialista en litigios estratégicos y arbitraje. 15+ años representando corporaciones y gerencias.</p>
+        </div>
+        <div class="card">
+          <h3>Socio Corporativo</h3>
+          <p>Gobierno corporativo, M&A y contratos complejos. Enfoque de prevención y eficiencia operativa.</p>
+        </div>
+        <div class="card">
+          <h3>Área Laboral</h3>
+          <p>Diseño de políticas, procesos y patrocinio en litigios laborales de alta complejidad.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= TESTIMONIOS ============= -->
+  <section class="section testi">
+    <div class="container">
+      <h2>Lo que dicen nuestros clientes</h2>
+      <p class="quote">“Nos brindaron asesoría clara y oportuna. Su estrategia fue clave para cerrar el caso con éxito.”</p>
+      <p class="author">Gerente General – Empresa XYZ S.A.C.</p>
+    </div>
+  </section>
+
+  <!-- ============= CONTACTO ============= -->
+  <section id="contacto" class="section">
+    <div class="container">
+      <h2>Contáctanos</h2>
+      <div class="contact" style="margin-top:var(--gap-2)">
+        <form class="card" onsubmit="event.preventDefault(); alert('¡Gracias! Responderemos pronto.');" aria-label="Formulario de contacto">
+          <div class="row">
+            <div>
+              <label for="nombre">Nombre</label>
+              <input id="nombre" name="nombre" autocomplete="name" required />
+            </div>
+            <div>
+              <label for="correo">Correo</label>
+              <input id="correo" type="email" name="email" autocomplete="email" required />
+            </div>
+          </div>
+          <div class="row">
+            <div>
+              <label for="telefono">Teléfono</label>
+              <input id="telefono" name="tel" autocomplete="tel" inputmode="tel" />
+            </div>
+            <div>
+              <label for="asunto">Asunto</label>
+              <input id="asunto" name="asunto" required />
+            </div>
+          </div>
+          <div style="margin-top:var(--gap-1)">
+            <label for="mensaje">Mensaje</label>
+            <textarea id="mensaje" name="mensaje" required></textarea>
+          </div>
+          <div style="margin-top:var(--gap-1)">
+            <button class="btn" type="submit">Enviar consulta</button>
+          </div>
+        </form>
+
+        <aside class="card" aria-label="Información de contacto">
+          <h3>Información</h3>
+          <p><strong>Dirección:</strong> Av. Principal 123, Piso 10 – San Isidro, Lima</p>
+          <p><strong>Tel:</strong> +51 000 000 000</p>
+          <p><strong>Correo:</strong> contacto@delrioabogados.pe</p>
+          <p class="muted">Horario: Lun–Vie 9:00–18:00</p>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= FOOTER ============= -->
+  <footer class="footer section" role="contentinfo">
+    <div class="container">
+      <div class="foot-grid">
+        <div>
+          <div class="foot-brand">Del <span>Rio</span> Abogados</div>
+          <p>Soluciones legales con enfoque en resultados y comunicación clara.</p>
+        </div>
+        <div>
+          <h3>Navegación</h3>
+          <p><a href="#inicio">Inicio</a></p>
+          <p><a href="#servicios">Áreas</a></p>
+          <p><a href="#equipo">Equipo</a></p>
+          <p><a href="#contacto">Contacto</a></p>
+        </div>
+        <div>
+          <h3>Legal</h3>
+          <p><a href="#">Política de Privacidad</a></p>
+          <p><a href="#">Términos de Uso</a></p>
+        </div>
+        <div>
+          <h3>Contacto</h3>
+          <p>San Isidro – Lima, Perú</p>
+          <p>+51 000 000 000</p>
+          <p>contacto@delrioabogados.pe</p>
+        </div>
+      </div>
+      <div class="foot-bottom">© 2025 Del Rio Abogados. Todos los derechos reservados.</div>
+    </div>
+  </footer>
+
+  <!-- CTA fija en móviles -->
+  <div class="sticky-cta" aria-hidden="false">
+    <a class="btn" href="#contacto">Agendar consulta</a>
+  </div>
+
+  <script>
+    // Menú responsive accesible
+    const burger = document.getElementById('burger');
+    const menu = document.getElementById('menu');
+    burger.addEventListener('click', () => {
+      const open = menu.classList.toggle('open');
+      burger.setAttribute('aria-expanded', open);
+    });
+    menu.querySelectorAll('a').forEach(a => a.addEventListener('click', ()=>menu.classList.remove('open')));
+  </script>
+</body>
+</html>
