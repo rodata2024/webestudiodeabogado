@@ -305,37 +305,60 @@
   </div>
 
   <script>
-    // Menú responsive accesible
-    const burger = document.getElementById('burger');
-    const menu = document.getElementById('menu');
-    burger.addEventListener('click', () => {
-      const open = menu.classList.toggle('open');
-      burger.setAttribute('aria-expanded', open);
-    });
-    menu.querySelectorAll('a').forEach(a => a.addEventListener('click', ()=>menu.classList.remove('open')));
+  // Menú responsive accesible
+  const burger = document.getElementById('burger');
+  const menu = document.getElementById('menu');
+  burger.addEventListener('click', () => {
+    const open = menu.classList.toggle('open');
+    burger.setAttribute('aria-expanded', open);
+  });
+  menu.querySelectorAll('a').forEach(a => a.addEventListener('click', ()=>menu.classList.remove('open')));
 
-    // Botón: abrir Gmail con datos del formulario
-    const btnGmail = document.getElementById('enviarGmail');
-    const msgEl = document.getElementById('formMsg');
+  // ===== Envío por app nativa en móviles; Gmail Web (popup) en escritorio =====
+  const btnGmail = document.getElementById('enviarGmail');
+  const msgEl = document.getElementById('formMsg');
+  const val = id => (document.getElementById(id)?.value || '').trim();
 
-    function val(id){ return (document.getElementById(id)?.value || '').trim(); }
+  function openDesktopGmailPopup(to, subject, body){
+    const url = `https://mail.google.com/mail/?view=cm&fs=1&to=${to}&su=${subject}&body=${body}`;
+    const w = Math.min(1000, screen.availWidth - 80);
+    const h = Math.min(800,  screen.availHeight - 120);
+    const left = (screen.availWidth - w) / 2;
+    const top  = (screen.availHeight - h) / 2;
+    const features = `popup=yes,toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes,width=${w},height=${h},top=${Math.max(0,top)},left=${Math.max(0,left)}`;
+    const win = window.open(url, 'gmailComposeWin', features);
+    if (!win || win.closed || typeof win.closed === 'undefined') {
+      window.open(url, '_blank', 'noopener'); // fallback pestaña
+    } else { win.focus(); }
+  }
 
-    btnGmail?.addEventListener('click', () => {
-      const nombre  = val('nombre');
-      const correo  = val('correo');
-      const tel     = val('telefono');
-      const asunto  = val('asunto');
-      const mensaje = val('mensaje');
+  function isMobile(){
+    const ua = navigator.userAgent || '';
+    return /Android|iPhone|iPad|iPod/i.test(ua);
+  }
 
-      if(!nombre || !correo || !asunto || !mensaje){
-        msgEl.textContent = 'Completa nombre, correo, asunto y mensaje.';
-        msgEl.style.color = '#b91c1c';
-        return;
-      }
+  function openMailerMobile(to, subject, body){
+    // Abre SIEMPRE la app de correo predeterminada (Gmail en Android si es la default, Apple Mail en iOS por defecto)
+    const mailto = `mailto:${to}?subject=${subject}&body=${body}`;
+    window.location.href = mailto;
+  }
 
-      const to   = 'rmesahuancah@unmsm.edu.pe';
-      const su   = encodeURIComponent(`[Web] ${asunto} – ${nombre}`);
-      const body = encodeURIComponent(
+  btnGmail?.addEventListener('click', () => {
+    const nombre  = val('nombre');
+    const correo  = val('correo');
+    const tel     = val('telefono');
+    const asunto  = val('asunto');
+    const mensaje = val('mensaje');
+
+    if(!nombre || !correo || !asunto || !mensaje){
+      msgEl.textContent = 'Completa nombre, correo, asunto y mensaje.';
+      msgEl.style.color = '#b91c1c';
+      return;
+    }
+
+    const to = 'rmesahuancah@unmsm.edu.pe';
+    const su = encodeURIComponent(`[Web] ${asunto} – ${nombre}`);
+    const body = encodeURIComponent(
 `Hola Del Rio Abogados,
 
 Mi nombre: ${nombre}
@@ -346,48 +369,17 @@ Mensaje:
 ${mensaje}
 
 — Enviado desde delrioabogados.pe`
-      );
+    );
 
-      // Abrir Gmail en nueva pestaña
-      // Abrir Gmail en ventana emergente centrada
-const gmailURL = `https://mail.google.com/mail/?view=cm&fs=1&to=${to}&su=${su}&body=${body}`;
+    if (isMobile()) {
+      // MÓVIL: app nativa (mailto)
+      openMailerMobile(to, su, body);
+    } else {
+      // ESCRITORIO: Gmail Web en popup
+      openDesktopGmailPopup(to, su, body);
+    }
+  });
+</script>
 
-// Tamaño recomendado (ajusta si quieres)
-const w = Math.min(1000, screen.availWidth - 80);
-const h = Math.min(800,  screen.availHeight - 120);
-const dualScreenLeft = window.screenLeft !== undefined ? window.screenLeft : screen.left;
-const dualScreenTop  = window.screenTop  !== undefined ? window.screenTop  : screen.top;
-const left = dualScreenLeft + (screen.availWidth - w) / 2;
-const top  = dualScreenTop  + (screen.availHeight - h) / 2;
-
-const features = [
-  `popup=yes`,
-  `toolbar=no`,
-  `location=no`,
-  `status=no`,
-  `menubar=no`,
-  `scrollbars=yes`,
-  `resizable=yes`,
-  `width=${w}`,
-  `height=${h}`,
-  `top=${Math.max(0, Math.round(top))}`,
-  `left=${Math.max(0, Math.round(left))}`,
-].join(',');
-
-// Intento de popup (permitido porque nace del click)
-const win = window.open(gmailURL, 'gmailComposeWin', features);
-
-// Fallback por si el navegador bloquea el popup
-if (!win || win.closed || typeof win.closed === 'undefined') {
-  window.open(gmailURL, '_blank', 'noopener');
-} else {
-  win.focus();
-}
-
-
-      // (Opcional) Fallback a mailto si no usa Gmail:
-      // setTimeout(()=>{ window.location.href = `mailto:${to}?subject=${su}&body=${body}`; }, 500);
-    });
-  </script>
 </body>
 </html>
