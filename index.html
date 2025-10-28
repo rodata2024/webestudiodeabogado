@@ -349,8 +349,41 @@ ${mensaje}
       );
 
       // Abrir Gmail en nueva pestaña
-      const gmailURL = `https://mail.google.com/mail/?view=cm&fs=1&to=${to}&su=${su}&body=${body}`;
-      window.open(gmailURL, '_blank', 'noopener');
+      // Abrir Gmail en ventana emergente centrada
+const gmailURL = `https://mail.google.com/mail/?view=cm&fs=1&to=${to}&su=${su}&body=${body}`;
+
+// Tamaño recomendado (ajusta si quieres)
+const w = Math.min(1000, screen.availWidth - 80);
+const h = Math.min(800,  screen.availHeight - 120);
+const dualScreenLeft = window.screenLeft !== undefined ? window.screenLeft : screen.left;
+const dualScreenTop  = window.screenTop  !== undefined ? window.screenTop  : screen.top;
+const left = dualScreenLeft + (screen.availWidth - w) / 2;
+const top  = dualScreenTop  + (screen.availHeight - h) / 2;
+
+const features = [
+  `popup=yes`,
+  `toolbar=no`,
+  `location=no`,
+  `status=no`,
+  `menubar=no`,
+  `scrollbars=yes`,
+  `resizable=yes`,
+  `width=${w}`,
+  `height=${h}`,
+  `top=${Math.max(0, Math.round(top))}`,
+  `left=${Math.max(0, Math.round(left))}`,
+].join(',');
+
+// Intento de popup (permitido porque nace del click)
+const win = window.open(gmailURL, 'gmailComposeWin', features);
+
+// Fallback por si el navegador bloquea el popup
+if (!win || win.closed || typeof win.closed === 'undefined') {
+  window.open(gmailURL, '_blank', 'noopener');
+} else {
+  win.focus();
+}
+
 
       // (Opcional) Fallback a mailto si no usa Gmail:
       // setTimeout(()=>{ window.location.href = `mailto:${to}?subject=${su}&body=${body}`; }, 500);
