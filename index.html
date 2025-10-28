@@ -5,79 +5,129 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Del Rio Abogados – Asesoría Legal Estratégica</title>
   <meta name="description" content="Estudio jurídico Del Rio Abogados. Litigios y arbitraje, corporativo y laboral. Atención en todo el Perú." />
-
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
 
   <style>
-    /* ==================== Marca / tokens ==================== */
+    /* ==================== Tokens de marca ==================== */
     :root{
       --rojo:#B73239;
       --rojo-osc:#A22D33;
+      --gris-950:#0b1220;
       --gris-900:#1f2937;
+      --gris-800:#374151;
       --gris-700:#4b5563;
-      --gris-400:#9ca3af;
+      --gris-500:#6b7280;
+      --gris-300:#e5e7eb;
       --gris-200:#f3f4f6;
       --blanco:#fff;
       --max:1200px;
 
-      /* Tipos y espacios fluidos */
-      --fz-h1:clamp(1.9rem, 3.8vw, 3.2rem);
-      --fz-h2:clamp(1.4rem, 2.6vw, 2.2rem);
-      --fz-h3:clamp(1.05rem, 1.8vw, 1.35rem);
-      --fz-body:clamp(.98rem, 1.2vw, 1.06rem);
-      --gap-1:clamp(12px, 2.2vw, 18px);
-      --gap-2:clamp(18px, 3.0vw, 26px);
-      --gap-3:clamp(26px, 4.5vw, 44px);
+      /* Tipos/espacios fluidos */
+      --fz-h1:clamp(1.9rem, 3.2vw, 3.1rem);
+      --fz-h2:clamp(1.35rem, 2.2vw, 2.1rem);
+      --fz-h3:clamp(1.05rem, 1.4vw, 1.25rem);
+      --fz-body:clamp(.98rem, 1.1vw, 1.05rem);
+      --gap-1:clamp(10px, 1.5vw, 16px);
+      --gap-2:clamp(16px, 2.4vw, 24px);
+      --gap-3:clamp(28px, 4.4vw, 48px);
       --radius:14px;
-      --shadow:0 10px 30px rgba(16,24,40,.08);
+      --shadow:0 10px 28px rgba(16,24,40,.08);
+      --nav-h:64px;
     }
+
     /* ==================== Reset ==================== */
     *,*::before,*::after{box-sizing:border-box}
     html{scroll-behavior:smooth}
     @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
-    body{margin:0;font-family:Montserrat,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--gris-900);line-height:1.6;font-size:var(--fz-body);background:var(--blanco)}
+    body{
+      margin:0;
+      font-family:Montserrat,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      color:var(--gris-900);
+      line-height:1.6;
+      font-size:var(--fz-body);
+      background:var(--blanco);
+      /* espacio para que la CTA móvil no tape contenido */
+      padding-bottom:72px;
+    }
     img{max-width:100%;display:block}
     a{text-decoration:none;color:var(--rojo)}
-    .container{max-width:var(--max);margin-inline:auto;padding-inline:clamp(16px, 3.2vw, 28px)}
+    .container{max-width:var(--max);margin-inline:auto;padding-inline:clamp(14px, 3.2vw, 28px)}
     h1,h2,h3{line-height:1.2;margin:0 0 .6rem}
     h1{font-size:var(--fz-h1)}
     h2{font-size:var(--fz-h2)}
     h3{font-size:var(--fz-h3)}
     p{margin:0 0 1rem}
     .section{padding-block:var(--gap-3)}
-    .btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;background:var(--rojo);color:#fff;border:0;border-radius:12px;padding:.9rem 1.2rem;font-weight:700;box-shadow:var(--shadow);transition:.2s ease;min-width:44px;min-height:44px}
-    .btn:hover{background:var(--rojo-osc);transform:translateY(-1px)}
     .muted{color:var(--gris-700)}
 
-    /* ==================== Header / nav ==================== */
-    .navbar{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid #eee}
-    .nav-inner{display:flex;align-items:center;justify-content:space-between;padding-block:.6rem}
-    .brand-wrap{display:flex;align-items:center;gap:.7rem}
-    .brand{font-weight:800;color:var(--gris-700);line-height:1}
-    .brand span{display:block;color:var(--rojo);line-height:1;margin-top:-2px}
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;gap:.5rem;
+      background:var(--rojo);color:#fff;border:0;border-radius:12px;
+      padding:.9rem 1.2rem;font-weight:700;box-shadow:var(--shadow);
+      transition:.2s ease;min-width:44px;min-height:44px;
+    }
+    .btn:hover{background:var(--rojo-osc);transform:translateY(-1px)}
+    .btn.block{width:100%}
+
+    /* ==================== Navbar ==================== */
+    .navbar{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid var(--gris-300)}
+    .nav-inner{display:flex;align-items:center;justify-content:space-between;height:var(--nav-h)}
+    .brand-wrap{display:flex;align-items:center;gap:.6rem;min-width:0}
+    .brand{font-weight:800;color:var(--gris-800);line-height:1;white-space:nowrap}
+    .brand span{display:inline-block;color:var(--rojo);margin-left:.2rem}
     .logo svg{display:block}
-    .nav-links{display:flex;align-items:center;gap:clamp(14px,2.6vw,28px)}
-    .nav-links a{color:var(--gris-700);font-weight:600;padding:.6rem .2rem;border-radius:10px}
+
+    /* Desktop menu */
+    .nav-links{display:flex;align-items:center;gap:clamp(12px,2.2vw,26px)}
+    .nav-links a{color:var(--gris-700);font-weight:600;padding:.5rem .25rem;border-radius:10px;white-space:nowrap}
     .nav-links a:hover{color:var(--rojo)}
+    .nav-cta{display:inline-block}
+    /* Oculta CTA del nav en móvil (la reemplaza la sticky) */
+    @media (max-width:900px){ .nav-cta{display:none} }
+
+    /* Mobile: burger + offcanvas */
     .burger{display:none;border:0;background:transparent;width:44px;height:44px;padding:0}
-    .burger span{display:block;height:3px;background:var(--gris-700);margin:6px 5px;border-radius:2px}
+    .burger span{display:block;height:3px;background:var(--gris-800);margin:6px 5px;border-radius:2px}
+    @media (max-width:900px){
+      .burger{display:block}
+      nav{position:fixed;inset:var(--nav-h) 0 auto 0;z-index:60;pointer-events:none}
+      .nav-links{
+        pointer-events:auto;
+        flex-direction:column;align-items:stretch;
+        background:#fff;border-top:1px solid var(--gris-300);
+        padding:12px;box-shadow:0 10px 24px rgba(0,0,0,.08);
+        transform:translateY(-16px);opacity:0;transition:.2s ease;
+      }
+      nav.open .nav-links{transform:none;opacity:1}
+    }
 
     /* ==================== Hero ==================== */
-    .hero{isolation:isolate;min-height:72vh;display:grid;place-items:center;text-align:center;color:#fff;background:
-      linear-gradient(rgba(0,0,0,.55), rgba(0,0,0,.55)),
-      url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2000&auto=format&fit=crop') center/cover no-repeat}
-    .hero .container{padding-block:var(--gap-3)}
-    .kicker{display:inline-block;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.25);backdrop-filter:saturate(120%) blur(2px);padding:.35rem .65rem;border-radius:999px;margin-bottom:var(--gap-1);font-weight:700}
+    .hero{
+      isolation:isolate;min-height:clamp(60vh, 72vh, 78vh);
+      display:grid;place-items:center;text-align:center;color:#fff;
+      background:
+        linear-gradient(rgba(0,0,0,.55), rgba(0,0,0,.55)),
+        url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2000&auto=format&fit=crop') center/cover no-repeat;
+    }
+    .hero .container{padding-block:clamp(20px, 6vh, 64px)}
+    .kicker{
+      display:inline-block;background:rgba(255,255,255,.1);
+      border:1px solid rgba(255,255,255,.25);
+      backdrop-filter:saturate(120%) blur(2px);
+      padding:.35rem .65rem;border-radius:999px;margin-bottom:var(--gap-1);font-weight:700
+    }
+    .hero-actions{display:grid;grid-template-columns:1fr;gap:12px;max-width:420px;margin:14px auto 0}
+    @media (min-width:520px){ .hero-actions{grid-template-columns:auto} }
 
-    /* ==================== Grillas ==================== */
-    .grid-areas{display:grid;gap:var(--gap-2);grid-template-columns:1fr}
-    @media (min-width:720px){.grid-areas{grid-template-columns:repeat(2,1fr)}}
-    @media (min-width:1024px){.grid-areas{grid-template-columns:repeat(3,1fr)}}
+    /* ==================== Cards / grids ==================== */
     .card{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:var(--gap-2)}
     .card h3{color:var(--rojo);margin-bottom:.35rem}
     .icon{width:50px;height:50px;border-radius:12px;display:grid;place-items:center;margin-bottom:.6rem;background:color-mix(in srgb, var(--rojo) 14%, white)}
 
-    /* ==================== Bloques ==================== */
+    .grid-areas{display:grid;gap:var(--gap-2);grid-template-columns:1fr}
+    @media (min-width:700px){.grid-areas{grid-template-columns:repeat(2,1fr)}}
+    @media (min-width:1024px){.grid-areas{grid-template-columns:repeat(3,1fr)}}
+
     .practice{background:var(--gris-200)}
     .about p{max-width:70ch}
     .testi{text-align:center}
@@ -86,12 +136,12 @@
 
     /* ==================== Contacto ==================== */
     .contact{display:grid;gap:var(--gap-2);grid-template-columns:1fr}
-    @media (min-width:920px){.contact{grid-template-columns:1.2fr .8fr}}
+    @media (min-width:980px){.contact{grid-template-columns:1.15fr .85fr}}
     form .row{display:grid;gap:var(--gap-1);grid-template-columns:1fr}
     @media (min-width:560px){form .row{grid-template-columns:1fr 1fr}}
     label{font-weight:700;font-size:.95rem}
-    input,textarea{width:100%;margin-top:.4rem;padding:12px 14px;border:1px solid #e5e7eb;border-radius:12px;font:inherit}
-    textarea{min-height:130px;resize:vertical}
+    input,textarea{width:100%;margin-top:.4rem;padding:12px 14px;border:1px solid var(--gris-300);border-radius:12px;font:inherit}
+    textarea{min-height:140px;resize:vertical}
 
     /* ==================== Footer ==================== */
     .footer{background:#111;color:#e8e8e8}
@@ -101,10 +151,10 @@
     .foot-brand{font-weight:900}
     .foot-brand span{color:var(--rojo)}
 
-    /* ==================== Helpers ==================== */
-    .sticky-cta{position:fixed;inset:auto 16px 16px 16px;z-index:60}
+    /* ==================== CTA fija móvil ==================== */
+    .sticky-cta{position:fixed;left:16px;right:16px;bottom:16px;z-index:60}
     .sticky-cta .btn{width:100%}
-    @media (min-width:760px){.sticky-cta{display:none}}
+    @media (min-width:900px){.sticky-cta{display:none}}
   </style>
 </head>
 <body>
@@ -115,25 +165,25 @@
       <div class="brand-wrap">
         <a class="logo" href="#inicio" aria-label="Del Rio Abogados">
           <!-- Mini logo D (gris) + R triangular (rojo) -->
-          <svg width="40" height="40" viewBox="0 0 100 100" aria-hidden="true">
+          <svg width="36" height="36" viewBox="0 0 100 100" aria-hidden="true">
             <path d="M18 15v70h22q20 0 32-10.5T84 50q0-18-12-26.5T45 15H18Z" fill="#4b5563"/>
             <path d="M18 52v33h12V64l28 21h16L40 52Z" fill="#B73239"/>
           </svg>
         </a>
-        <div class="brand">Del<span>Rio</span></div>
+        <div class="brand">Del <span>Rio</span></div>
       </div>
 
       <button class="burger" id="burger" aria-label="Abrir menú" aria-controls="menu" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
 
-      <nav>
+      <nav id="nav">
         <ul id="menu" class="nav-links" role="list">
           <li><a href="#inicio">Inicio</a></li>
           <li><a href="#servicios">Áreas</a></li>
           <li><a href="#nosotros">Nosotros</a></li>
           <li><a href="#equipo">Equipo</a></li>
-          <li><a class="btn" href="#contacto">Agendar consulta</a></li>
+          <li class="nav-cta"><a class="btn" href="#contacto">Agendar consulta</a></li>
         </ul>
       </nav>
     </div>
@@ -145,7 +195,9 @@
       <div class="kicker">Excelencia jurídica · Respuesta estratégica</div>
       <h1>Asesoría Legal Estratégica</h1>
       <p class="muted">Litigios y arbitraje, corporativo y laboral. Atención a empresas y personas en todo el Perú.</p>
-      <p style="margin-top:var(--gap-1)"><a class="btn" href="#contacto">Solicitar evaluación</a></p>
+      <div class="hero-actions">
+        <a class="btn block" href="#contacto">Solicitar evaluación</a>
+      </div>
     </div>
   </section>
 
@@ -218,7 +270,6 @@
     <div class="container">
       <h2>Contáctanos</h2>
       <div class="contact" style="margin-top:var(--gap-2)">
-        <!-- FORM: ahora con id y botón "Enviar por Gmail" -->
         <form id="contactForm" class="card" aria-label="Formulario de contacto">
           <div class="row">
             <div>
@@ -245,7 +296,7 @@
             <textarea id="mensaje" name="mensaje" required></textarea>
           </div>
           <div style="margin-top:var(--gap-1)">
-            <button class="btn" type="button" id="enviarGmail">Enviar por Gmail</button>
+            <button class="btn" type="button" id="enviarGmail">Enviar por correo</button>
             <p id="formMsg" class="muted" style="margin-top:.6rem"></p>
           </div>
         </form>
@@ -305,60 +356,52 @@
   </div>
 
   <script>
-  // Menú responsive accesible
-  const burger = document.getElementById('burger');
-  const menu = document.getElementById('menu');
-  burger.addEventListener('click', () => {
-    const open = menu.classList.toggle('open');
-    burger.setAttribute('aria-expanded', open);
-  });
-  menu.querySelectorAll('a').forEach(a => a.addEventListener('click', ()=>menu.classList.remove('open')));
+    // ===== Nav responsive (offcanvas) =====
+    const burger = document.getElementById('burger');
+    const nav = document.getElementById('nav');
+    const menu = document.getElementById('menu');
+    burger.addEventListener('click', () => {
+      const open = nav.classList.toggle('open');
+      burger.setAttribute('aria-expanded', open);
+    });
+    menu.querySelectorAll('a').forEach(a =>
+      a.addEventListener('click', ()=>nav.classList.remove('open'))
+    );
 
-  // ===== Envío por app nativa en móviles; Gmail Web (popup) en escritorio =====
-  const btnGmail = document.getElementById('enviarGmail');
-  const msgEl = document.getElementById('formMsg');
-  const val = id => (document.getElementById(id)?.value || '').trim();
+    // ===== Envío: móviles => app nativa (mailto), desktop => Gmail popup =====
+    const btnGmail = document.getElementById('enviarGmail');
+    const msgEl = document.getElementById('formMsg');
+    const val = id => (document.getElementById(id)?.value || '').trim();
+    const isMobile = () => /Android|iPhone|iPad|iPod/i.test(navigator.userAgent || '');
 
-  function openDesktopGmailPopup(to, subject, body){
-    const url = `https://mail.google.com/mail/?view=cm&fs=1&to=${to}&su=${subject}&body=${body}`;
-    const w = Math.min(1000, screen.availWidth - 80);
-    const h = Math.min(800,  screen.availHeight - 120);
-    const left = (screen.availWidth - w) / 2;
-    const top  = (screen.availHeight - h) / 2;
-    const features = `popup=yes,toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes,width=${w},height=${h},top=${Math.max(0,top)},left=${Math.max(0,left)}`;
-    const win = window.open(url, 'gmailComposeWin', features);
-    if (!win || win.closed || typeof win.closed === 'undefined') {
-      window.open(url, '_blank', 'noopener'); // fallback pestaña
-    } else { win.focus(); }
-  }
-
-  function isMobile(){
-    const ua = navigator.userAgent || '';
-    return /Android|iPhone|iPad|iPod/i.test(ua);
-  }
-
-  function openMailerMobile(to, subject, body){
-    // Abre SIEMPRE la app de correo predeterminada (Gmail en Android si es la default, Apple Mail en iOS por defecto)
-    const mailto = `mailto:${to}?subject=${subject}&body=${body}`;
-    window.location.href = mailto;
-  }
-
-  btnGmail?.addEventListener('click', () => {
-    const nombre  = val('nombre');
-    const correo  = val('correo');
-    const tel     = val('telefono');
-    const asunto  = val('asunto');
-    const mensaje = val('mensaje');
-
-    if(!nombre || !correo || !asunto || !mensaje){
-      msgEl.textContent = 'Completa nombre, correo, asunto y mensaje.';
-      msgEl.style.color = '#b91c1c';
-      return;
+    function openDesktopGmailPopup(to, subject, body){
+      const url = `https://mail.google.com/mail/?view=cm&fs=1&to=${to}&su=${subject}&body=${body}`;
+      const w = Math.min(980, screen.availWidth - 80);
+      const h = Math.min(760, screen.availHeight - 120);
+      const left = (screen.availWidth - w) / 2;
+      const top  = (screen.availHeight - h) / 2;
+      const feat = `popup=yes,toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes,width=${w},height=${h},top=${Math.max(0,top)},left=${Math.max(0,left)}`;
+      const win = window.open(url, 'gmailComposeWin', feat);
+      if (!win || win.closed || typeof win.closed === 'undefined') window.open(url, '_blank', 'noopener');
+      else win.focus();
     }
 
-    const to = 'rmesahuancah@unmsm.edu.pe';
-    const su = encodeURIComponent(`[Web] ${asunto} – ${nombre}`);
-    const body = encodeURIComponent(
+    btnGmail?.addEventListener('click', () => {
+      const nombre  = val('nombre');
+      const correo  = val('correo');
+      const tel     = val('telefono');
+      const asunto  = val('asunto');
+      const mensaje = val('mensaje');
+
+      if(!nombre || !correo || !asunto || !mensaje){
+        msgEl.textContent = 'Completa nombre, correo, asunto y mensaje.';
+        msgEl.style.color = '#b91c1c';
+        return;
+      }
+
+      const to = 'rmesahuancah@unmsm.edu.pe';
+      const su = encodeURIComponent(`[Web] ${asunto} – ${nombre}`);
+      const body = encodeURIComponent(
 `Hola Del Rio Abogados,
 
 Mi nombre: ${nombre}
@@ -369,17 +412,16 @@ Mensaje:
 ${mensaje}
 
 — Enviado desde delrioabogados.pe`
-    );
+      );
 
-    if (isMobile()) {
-      // MÓVIL: app nativa (mailto)
-      openMailerMobile(to, su, body);
-    } else {
-      // ESCRITORIO: Gmail Web en popup
-      openDesktopGmailPopup(to, su, body);
-    }
-  });
-</script>
-
+      if (isMobile()) {
+        // móvil -> abre app nativa (Gmail/Apple Mail según configuración)
+        window.location.href = `mailto:${to}?subject=${su}&body=${body}`;
+      } else {
+        // escritorio -> Gmail web en popup
+        openDesktopGmailPopup(to, su, body);
+      }
+    });
+  </script>
 </body>
 </html>
